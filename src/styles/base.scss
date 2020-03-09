@@ -1,0 +1,177 @@
+// 字体大小
+@for $i from 10 through 200 {
+  .f-s-#{$i} {
+    font-size: ($i) * 1px;
+  }
+}
+
+// 浮动
+.clear {
+  &:before,
+  &:after {
+    display: table;
+  }
+
+  &:after {
+    content: "";
+    clear: both;
+  }
+}
+
+.fl,
+.fr {
+  display: inline
+}
+
+.fr {
+  float: right;
+}
+
+.fl {
+  float: left;
+}
+
+.block {
+  display: block;
+  width: 100%;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+// 背景颜色
+.bg-white {
+  background: #fff;
+}
+
+.t-white {
+  color: #fff;
+}
+
+.t-grey {
+  color: #9B9B9B
+}
+
+// 线
+.vui-line {
+  border-bottom: 1px solid #f2f2f2;
+}
+
+//对齐方式
+.tl {
+  text-align: left !important;
+}
+
+.tr {
+  text-align: right !important;
+}
+
+.tc {
+  text-align: center !important;
+}
+
+.tj {
+  text-align: justify;
+}
+
+.tn {
+  white-space: nowrap;
+}
+
+.b {
+  font-weight: 700;
+}
+
+.d {
+  text-decoration: line-through;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+// 填充边距方法
+@mixin padding-margin($className, $attr) {
+  @for $i from 0 through 700 {
+    .#{$className}#{$i} {
+      #{$attr}: ($i) * 1px;
+    }
+  }
+}
+
+//默认填充
+@include padding-margin(pd, padding);
+@include padding-margin(pt, padding-top);
+@include padding-margin(pr, padding-right);
+@include padding-margin(pb, padding-bottom);
+@include padding-margin(pl, padding-left);
+//默认边距
+@include padding-margin(mg, margin);
+@include padding-margin(mt, margin-top);
+@include padding-margin(mr, margin-right);
+@include padding-margin(mb, margin-bottom);
+@include padding-margin(ml, margin-left);
+
+
+// 多文本溢出
+@mixin ell($multi-line:'false', $line-clamp:0, $box-orient:initial) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @if $multi-line=='true' {
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: $line-clamp; // number行数
+    /* autoprefixer: ignore next */
+    -webkit-box-orient: $box-orient; //方向 vertical
+  }
+
+  @else {
+    white-space: nowrap;
+    display: block;
+  }
+}
+
+@for $i from 1 through 7 {
+  @if $i==1 {
+    .ell {
+      @include ell()
+    }
+  }
+
+  @else {
+    .ell-#{$i} {
+      @include ell('true', $i, vertical)
+    }
+  }
+}
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin scrollBar {
+  &::-webkit-scrollbar-track-piece {
+    background: #d3dce6;
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #99a9bf;
+    border-radius: 20px;
+  }
+}
+
+@mixin relative {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
